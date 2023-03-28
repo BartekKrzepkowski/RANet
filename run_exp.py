@@ -54,8 +54,8 @@ def objective(lr, wd):
 
     args.num_classes = NUM_CLASSES
     # trainer & scheduler
-    RANDOM_SEED = 42
-    EPOCHS = 50
+    RANDOM_SEED = 71
+    EPOCHS = 200
     GRAD_ACCUM_STEPS = 1
     CLIP_VALUE = 0.0
     EXP_NAME = f'ran_lr_{lr}_wd_{wd}'
@@ -114,10 +114,11 @@ def objective(lr, wd):
         clip_value=CLIP_VALUE,
         base_path='reports',
         exp_name=EXP_NAME,
-        logger_config={'logger_name': 'tensorboard', 'project_name': PROJECT_NAME,
+        logger_config={'logger_name': 'tensorboard', 'project_name': PROJECT_NAME, 'entity': 'ideas_cv',
                        'hyperparameters': h_params_overall, 'whether_use_wandb': True,
                        'layout': ee_tensorboard_layout(params_names), 'mode': 'online'
                        },
+        whether_disable_tqdm=True,
         random_seed=RANDOM_SEED,
         device=device
     )
@@ -126,4 +127,4 @@ def objective(lr, wd):
 
 
 if __name__ == "__main__":
-        objective(1e-2, 1e-2)
+        objective(5e-2, 1e-3)
